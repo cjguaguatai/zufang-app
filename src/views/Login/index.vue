@@ -7,28 +7,25 @@
       class="navbar"
     />
     <van-form @submit="sendSubmit">
-      <van-field
-        v-model="username"
-        name="用户名"
-        placeholder="请输入账号"
-        :rules="[{ required: true, message: '请输入账号' }]"
-      />
+      <van-field v-model="username" name="用户名" placeholder="请输入账号" />
       <van-field
         v-model="password"
         type="password"
         name="密码"
         placeholder="请输入密码"
-        :rules="[{ required: true, message: '请输入密码' }]"
       />
       <div style="margin: 16px">
-        <van-button block type="info" native-type="submit" class="sendBtn"
+        <van-button
+          block
+          type="info"
+          native-type="submit"
+          class="sendBtn"
+          @click="sendBtn"
           >提交</van-button
         >
       </div>
     </van-form>
-    <div class="register">
-      还没有账号，去注册
-    </div>
+    <div class="register">还没有账号，去注册</div>
   </div>
 </template>
 
@@ -48,10 +45,18 @@ export default {
     },
     async sendSubmit () {
       try {
-        const res = await login()
+        const res = await login(this.username, this.password)
         console.log(res)
       } catch (e) {
         console.log(e)
+      }
+    },
+    sendBtn () {
+      if (this.username.trim() === '' || this.password.trim() === '') {
+        this.$toast('请不要输入空值')
+      }
+      if (!/^[a-zA-Z0-9]{5,12}$/.test(this.password.trim())) {
+        this.$toast('密码格式5-12位的字母和数字')
       }
     }
   }
@@ -71,11 +76,10 @@ export default {
 .sendBtn {
   background-color: #21b97a;
 }
-.register{
-  width: 235px;
-  height: 20px;
-  font-size: 12px!important;
-  margin: 70px auto;
-  line-height: 20px;
+.register {
+  width: 230px;
+  font-size: 12px !important;
+  margin: 0 auto;
+  text-align: center;
 }
 </style>
