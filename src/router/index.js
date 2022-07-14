@@ -6,6 +6,17 @@ const routes = [
   {
     path: '/login',
     component: () => import('@/views/Login')
+  },
+  {
+    path: '/layout',
+    component: () => import('@/views/Layout'),
+    children: [
+      {
+        path: '/my',
+        name: 'my',
+        component: () => import('@/views/My')
+      }
+    ]
   }
 ]
 

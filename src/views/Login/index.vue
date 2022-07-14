@@ -21,11 +21,12 @@
           native-type="submit"
           class="sendBtn"
           @click="sendBtn"
-          >提交</van-button
+          >登录</van-button
         >
       </div>
     </van-form>
     <div class="register">还没有账号，去注册</div>
+    <div></div>
   </div>
 </template>
 
