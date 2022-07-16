@@ -15,12 +15,7 @@
         placeholder="请输入密码"
       />
       <div style="margin: 16px">
-        <van-button
-          block
-          type="info"
-          native-type="submit"
-          class="sendBtn"
-          @click="sendBtn"
+        <van-button block type="info" native-type="submit" class="sendBtn"
           >登录</van-button
         >
       </div>
@@ -45,19 +40,23 @@ export default {
       this.$router.back()
     },
     async sendSubmit () {
-      try {
-        const res = await login(this.username, this.password)
-        console.log(res)
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    sendBtn () {
       if (this.username.trim() === '' || this.password.trim() === '') {
-        this.$toast('请不要输入空值')
+        return this.$toast('请不要输入空值')
       }
       if (!/^[a-zA-Z0-9]{5,12}$/.test(this.password.trim())) {
-        this.$toast('密码格式5-12位的字母和数字')
+        return this.$toast('密码格式5-12位的字母和数字')
+      }
+
+      try {
+        const res = await login(this.username, this.password)
+        if (res.data.status === 400) {
+          return this.$toast.fail(res.data.description)
+        }
+        this.$router.back()
+        this.$store.commit('setUserToken', res.data.body)
+        console.log(res.data)
+      } catch (e) {
+        console.log(e)
       }
     }
   }

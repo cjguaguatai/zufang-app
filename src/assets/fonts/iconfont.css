@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3522572 */
-  src: url('iconfont.woff2?t=1657785833470') format('woff2'),
-       url('iconfont.woff?t=1657785833470') format('woff'),
-       url('iconfont.ttf?t=1657785833470') format('truetype');
+  src: url('iconfont.woff2?t=1657972359451') format('woff2'),
+       url('iconfont.woff?t=1657972359451') format('woff'),
+       url('iconfont.ttf?t=1657972359451') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,50 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xiyiji:before {
+  content: "\e67d";
+}
+
+.icon-reshuiqi:before {
+  content: "\e6fc";
+}
+
+.icon-meiqi:before {
+  content: "\e60e";
+}
+
+.icon-shafa:before {
+  content: "\e652";
+}
+
+.icon-kongtiao:before {
+  content: "\e63c";
+}
+
+.icon-xiajiantou:before {
+  content: "\eb6d";
+}
+
+.icon-dianshiji:before {
+  content: "\e90a";
+}
+
+.icon-bingxiang:before {
+  content: "\e90b";
+}
+
+.icon-nuanqi:before {
+  content: "\e621";
+}
+
+.icon-yigui:before {
+  content: "\e60d";
+}
+
+.icon-kuandai:before {
+  content: "\e614";
 }
 
 .icon-xinyongqia:before {
