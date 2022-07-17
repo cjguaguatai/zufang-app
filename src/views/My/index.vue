@@ -36,7 +36,7 @@
       </div>
     </div>
     <van-grid :column-num="3" :border="false" class="myGrid">
-      <van-grid-item text="我的收藏" @click="$router.push('/favorate')">
+      <van-grid-item text="我的收藏" @click="toFavoriteFn">
         <i slot="icon" class="iconfont icon-shoucang"></i>
       </van-grid-item>
       <van-grid-item text="我的出租">
@@ -82,6 +82,7 @@ export default {
         console.log(e)
       }
     },
+    // 更新用户信息
     async update () {
       try {
         if (this.isLogin) {
@@ -95,6 +96,14 @@ export default {
       } catch (e) {
         // console.log(e)
         this.$toast.fail('用户认证失败，请重试')
+      }
+    },
+    // 前往我的收藏界面
+    toFavoriteFn () {
+      if (this.isLogin) {
+        this.$router.push('/favorate')
+      } else {
+        this.$router.push('/login')
       }
     }
   },

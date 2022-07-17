@@ -1,5 +1,5 @@
 <template>
-  <div class="HouseItem_house">
+  <div class="HouseItem_house" @click="clickFn(list.houseCode)">
     <div class="img">
       <img :src="`http://liufusong.top:8080${list.houseImg}`" alt="" />
     </div>
@@ -15,11 +15,22 @@
 </template>
 
 <script>
+
 export default {
-  props: ['list']
-  // created () {
-  //   console.log(this.list)
-  // }
+  props: ['list'],
+  methods: {
+    // 根据code获取房屋具体信息
+    async clickFn (id) {
+      this.$store.commit('setId', this.list.houseCode)
+      this.$router.push({
+        name: 'detail'
+        // path: `/detail/${this.$store.state.id}`
+        // path: '/detail',
+      })
+      // const res = await getHouse(id)
+      // console.log(res)
+    }
+  }
 }
 </script>
 

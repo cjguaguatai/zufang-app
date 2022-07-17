@@ -5,15 +5,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userToken: getToken() || {}
+    // token
+    userToken: getToken('userToken') || {},
+    // 租房详情页标头id
+    id: getToken('id')
   },
   getters: {},
   mutations: {
+    // 更改token
     setUserToken (state, data) {
       // console.log(state)
       // console.log(data)
       state.userToken = data
-      setToken(data)
+      setToken('userToken', data)
+    },
+    // 更改租房详情页标头id
+    setId (state, data) {
+      state.id = data
+      setToken('id', data)
     },
     removeUserToken () {
       removeToken()

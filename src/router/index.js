@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// import store from '@/store'
 Vue.use(VueRouter)
 
 const routes = [
@@ -40,9 +41,14 @@ const routes = [
   {
     path: '/favorate',
     component: () => import('@/views/Favorate')
+  },
+  {
+    // path: `/detail/${store.state.id}`,
+    path: '/detail',
+    name: 'detail',
+    component: () => import('@/views/Detail')
   }
 ]
-
 const router = new VueRouter({
   routes
 })

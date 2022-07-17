@@ -35,3 +35,10 @@ export const getFavorite = () => {
     url: '/user/favorites'
   })
 }
+
+// 查看已发布房源列表
+export const getRoomList = () => {
+  return request({
+    url: '/user/houses'
+  })
+}

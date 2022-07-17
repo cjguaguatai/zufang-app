@@ -8,7 +8,7 @@
 <script>
 import greenHeader from '@/components/greenHeader.vue'
 import favoriteItem from '@/views/Favorate/favoriteItem.vue'
-import { getFavorite } from '@/api/user'
+import { getFavorite, getRoomList } from '@/api/user'
 export default {
   name: 'Favorate',
   data () {
@@ -22,17 +22,30 @@ export default {
   },
   created () {
     this.getFavoriteFn()
+    this.getRoomListFn()
   },
   methods: {
+    // 获取收藏列表
     async getFavoriteFn () {
       try {
-        const { data } = await getFavorite()
-        console.log(data)
-        this.info = data.body
+        const res = await getFavorite()
+        // console.log(res)
+        this.info = res.data.body
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    // 获取已发布房源列表
+    async getRoomListFn () {
+      try {
+        await getRoomList()
+        // console.log(res)
+        // this.info = data.body
       } catch (e) {
         console.log(e)
       }
     }
+
   }
 }
 </script>

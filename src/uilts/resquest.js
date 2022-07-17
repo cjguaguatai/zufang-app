@@ -17,7 +17,7 @@ request.interceptors.request.use(
       userToken: { token }
     } = store.state
     if (token) {
-      config.headers.authorization = `${token}`
+      config.headers.Authorization = `${token}`
     }
     return config
   },
