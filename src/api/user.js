@@ -42,3 +42,23 @@ export const getRoomList = () => {
     url: '/user/houses'
   })
 }
+
+// 查看房屋是否被收藏
+export const getFavoriteShow = (id) =>
+  request({
+    url: `/user/favorites/${id}`
+  })
+
+// 添加收藏
+export const addFavorite = (id) =>
+  request({
+    url: `/user/favorites/${id}`,
+    method: 'post'
+  })
+
+// 删除收藏
+export const removeFavorite = (id) =>
+  request({
+    url: `/user/favorites/${id}`,
+    method: 'delete'
+  })

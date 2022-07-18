@@ -1,85 +1,117 @@
 <template>
-  <div>
+  <div class="Detail-container">
     <greenHeader :title="info.community" />
-    <div class="swipers">
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item, index) in info.houseImg" :key="index">
-          <img :src="`http://liufusong.top:8080${item}`" alt="" />
-        </van-swipe-item>
-      </van-swipe>
-    </div>
-    <div class="houseInfo">
-      <h3>{{ info.title }}</h3>
-      <div class="button" v-for="(item, index) in info.tags" :key="index">
-        {{ item }}
+    <div class="main">
+      <div class="swipers">
+        <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+          <van-swipe-item v-for="(item, index) in info.houseImg" :key="index">
+            <img :src="`http://liufusong.top:8080${item}`" alt="" />
+          </van-swipe-item>
+        </van-swipe>
       </div>
-      <div class="specs">
-        <div class="box">
-          <div class="top">
-            {{ info.price }}
-            <span>/月</span>
+      <div class="houseInfo">
+        <h3>{{ info.title }}</h3>
+        <div class="button" v-for="(item, index) in info.tags" :key="index">
+          {{ item }}
+        </div>
+        <div class="specs">
+          <div class="box">
+            <div class="top">
+              {{ info.price }}
+              <span>/月</span>
+            </div>
+            <div class="bottom">租金</div>
           </div>
-          <div class="bottom">租金</div>
-        </div>
-        <div class="box">
-          <div class="top">
-            {{ info.roomType }}
+          <div class="box">
+            <div class="top">
+              {{ info.roomType }}
+            </div>
+            <div class="bottom">房型</div>
           </div>
-          <div class="bottom">房型</div>
-        </div>
-        <div class="box">
-          <div class="top">{{ info.size }}平米</div>
-          <div class="bottom">面积</div>
-        </div>
-      </div>
-      <div class="houseInfoFooter">
-        <div class="left">
-          <div>装修： <span>精装</span></div>
-          <div class="top">
-            楼层： <span>{{ info.floor }}</span>
+          <div class="box">
+            <div class="top">{{ info.size }}平米</div>
+            <div class="bottom">面积</div>
           </div>
         </div>
-        <div class="right">
-          <div>
-            朝向： <span>{{ info && info.oriented[0] }}</span>
+        <div class="houseInfoFooter">
+          <div class="left">
+            <div>装修： <span>精装</span></div>
+            <div class="top">
+              楼层： <span>{{ info.floor }}</span>
+            </div>
           </div>
-          <div class="top">类型： <span>普通住宅</span></div>
+          <div class="right">
+            <div>
+              朝向： <span>{{ info && info.oriented[0] }}</span>
+            </div>
+            <div class="top">类型： <span>普通住宅</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- 灰色过度 -->
+      <div class="hui"></div>
+      <!-- 地图区域 -->
+      <div class="map">
+        <div class="title">小区：xxx</div>
+        <div class="img"></div>
+      </div>
+      <!-- 房屋信息 -->
+      <div class="houseDetail">
+        <!-- 房屋配套 -->
+        <div class="title">房屋配套</div>
+        <div class="icon">
+          <div v-for="item in showIconList" :key="item.id" class="box">
+            <i :class="`iconfont ${item.iconList}`"></i>
+            <div>{{ item.furnitureList }}</div>
+          </div>
+        </div>
+        <div class="hui"></div>
+        <!-- 房源概况 -->
+        <div class="title">房屋概括</div>
+        <div>
+          <div class="userInfo">
+            <img src="http://liufusong.top:8080/img/avatar.png" alt="" />
+            <div class="middle">
+              <div>王女士</div>
+              <div class="text">
+                <i class="iconfont icon-xinyongqia"></i>
+                <span>已认证房主</span>
+              </div>
+            </div>
+          </div>
+          <div class="text">
+            1.周边配套齐全，地铁四号线陶然亭站，交通便利，公交云集，距离北京南站、西站都很近距离。
+            2.小区规模大，配套全年，幼儿园，体育场，游泳馆，养老院，小学。
+            3.人车分流，环境优美。
+            4.精装两居室，居家生活方便，还有一个小书房，看房随时联系。
+          </div>
         </div>
       </div>
     </div>
-    <!-- 灰色过度 -->
-    <div class="hui"></div>
-    <!-- 地图区域 -->
-    <div class="map">
-      <div class="title">小区：xxx</div>
-      <div class="img"></div>
-    </div>
-    <!-- 房屋配置 -->
-    <div class="houseDetail">
-      <div class="title">房屋配套</div>
-      <div class="icon">
-        <div v-for="item in showIconList" :key="item.id" class="box">
-          <i :class="`iconfont ${item.iconList}`"></i>
-          <div>{{ item.furnitureList }}</div>
-        </div>
-      </div>
-    </div>
+
     <!-- 底部粘性布局 -->
-    <!-- <footer>
-      <div class="left box">
-        <img src="http://liufusong.top:8080/img/star.png" alt="" />
+    <footer>
+      <div class="left box" @click="changeFavorite">
+        <img
+          v-if="isFavorite"
+          src="http://liufusong.top:8080/img/star.png"
+          alt=""
+        />
+        <img v-else src="http://liufusong.top:8080/img/unstar.png" alt="" />
         <span>收藏</span>
       </div>
       <div class="middle box">在线咨询</div>
       <div class="right box">电话咨询</div>
-    </footer> -->
+    </footer>
   </div>
 </template>
 
 <script>
 import greenHeader from '@/components/greenHeader.vue'
 import { getHouse } from '@/api/house'
+import { getFavoriteShow, addFavorite, removeFavorite } from '@/api/user'
 export default {
+  name: 'Datail',
   components: {
     greenHeader
   },
@@ -148,14 +180,17 @@ export default {
           id: 10,
           isActive: false
         }
-      ]
+      ],
+      isFavorite: ''
     }
   },
   created () {
     // console.log(this.$route.params.id)
     this.getInfo()
+    this.getFavoriteShow()
   },
   methods: {
+    // 获取该房屋信息
     async getInfo () {
       try {
         this.$toast.loading({
@@ -170,6 +205,36 @@ export default {
           this.$toast.fail('请求超时，请重试')
         }
         console.log(e)
+      }
+    },
+    // 查看该房屋信息是否被收藏
+    async getFavoriteShow () {
+      try {
+        const { data } = await getFavoriteShow(this.$store.state.id)
+        // console.log(res)
+        this.isFavorite = data.body.isFavorite
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    // 点击收藏，添加或删除
+    async changeFavorite () {
+      if (this.isFavorite) {
+        try {
+          const res = await removeFavorite(this.$store.state.id)
+          console.log(res)
+          this.isFavorite = !this.isFavorite
+        } catch (error) {
+          console.log(error)
+        }
+      } else {
+        try {
+          const res = await addFavorite(this.$store.state.id)
+          console.log(res)
+          this.isFavorite = !this.isFavorite
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
   },
@@ -196,6 +261,11 @@ export default {
 * {
   margin: 0 0;
   padding: 0 0;
+}
+.main {
+  // height: 100%;
+  margin-bottom: 50px;
+  // overflow: hidden;
 }
 .swipers {
   .my-swipe {
@@ -298,7 +368,9 @@ export default {
   }
 }
 .houseDetail {
-  height: 200px;
+  // margin-bottom: 50px;
+
+  // height: 200px;
   .title {
     font-weight: 600;
     font-size: 15px;
@@ -308,6 +380,7 @@ export default {
   }
   .icon {
     display: flex;
+    padding: 0 10px;
     .box {
       // flex: 1;
       width: 71px;
@@ -322,8 +395,32 @@ export default {
       }
     }
   }
+  .userInfo {
+    display: flex;
+    margin: 10px 10px 0 15px;
+    img {
+      width: 52px;
+      height: 52px;
+      margin-right: 10px;
+    }
+    .middle {
+      display: flex;
+      color: #333;
+      font-size: 14px;
+      flex-direction: column;
+      // align-items: center;
+      padding-left: 5px;
+      justify-content: center;
+      .text {
+        font-size: 12px;
+        color: #fa5741;
+      }
+    }
+  }
 }
+//底部固定栏
 footer {
+  background-color: #fff;
   position: fixed;
   width: 100%;
   bottom: 0;

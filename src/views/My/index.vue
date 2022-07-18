@@ -39,7 +39,7 @@
       <van-grid-item text="我的收藏" @click="toFavoriteFn">
         <i slot="icon" class="iconfont icon-shoucang"></i>
       </van-grid-item>
-      <van-grid-item text="我的出租">
+      <van-grid-item text="我的出租" @click="toRentFn">
         <i slot="icon" class="iconfont icon-fangzi"></i>
       </van-grid-item>
       <van-grid-item text="看房记录">
@@ -102,6 +102,14 @@ export default {
     toFavoriteFn () {
       if (this.isLogin) {
         this.$router.push('/favorate')
+      } else {
+        this.$router.push('/login')
+      }
+    },
+    // 前往我的出租页面
+    toRentFn () {
+      if (this.isLogin) {
+        this.$router.push('/rent')
       } else {
         this.$router.push('/login')
       }
