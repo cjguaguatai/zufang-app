@@ -8,8 +8,8 @@
         /></van-swipe-item>
       </van-swipe>
       <van-search class="search" v-model="value" placeholder="请输入小区或地址">
-        <span slot="label" class="text"
-          >上海<i class="iconfont icon-xiajiantou"></i
+        <span slot="label" class="text" @click="toCity"
+          >{{ $store.state.area.label }}<i class="iconfont icon-xiajiantou"></i
         ></span>
       </van-search>
       <i class="iconfont icon-ditu"></i>
@@ -38,33 +38,53 @@
         <div class="right">更多</div>
       </div>
       <van-row type="flex" justify="space-around">
-        <van-col span="11"><div class="group-box"></div></van-col>
-        <van-col span="11"><div class="group-box"></div></van-col>
-        <van-col span="11"><div class="group-box"></div></van-col>
-        <van-col span="11"><div class="group-box"></div></van-col>
+        <van-col span="11" v-for="item in groups" :key="item.id">
+          <div class="group-box">
+            <img :src="`http://liufusong.top:8080${item.imgSrc}`" alt="" />
+            <div class="text">
+              <div class="top">{{ item.title }}</div>
+              <div class="bottom">{{ item.desc }}</div>
+            </div>
+          </div>
+        </van-col>
       </van-row>
     </div>
   </div>
 </template>
 
 <script>
-import { getSwiper } from '@/api/home'
+import { getSwiper, getGroups } from '@/api/home'
 export default {
   name: 'HomeIndex',
   data () {
     return {
       imgSrc: '',
-      value: ''
+      value: '',
+      groups: []
     }
   },
   created () {
     this.getSwiperFn()
+    this.getGroupsFn()
   },
   methods: {
+    // 获取轮播图
     async getSwiperFn () {
       const { data } = await getSwiper()
-      console.log(data.body)
+      // console.log(data.body)
       this.imgSrc = data.body
+    },
+    toCity () {
+      this.$router.push('/city')
+    },
+    async getGroupsFn () {
+      try {
+        const res = await getGroups(this.$store.state.area.value)
+        // console.log(res)
+        this.groups = res.data.body
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
@@ -160,8 +180,19 @@ export default {
   .group-box {
     // width: 172px;
     height: 60px;
-    background-color: pink;
+    background-color: #fff;
     margin-bottom: 10px;
+    display: flex;
+    font-size: 14px;
+    color: #333333;
+    img{
+      width: 50px;
+      height: 50px;
+      margin: 0 10px;
+    }
+    .text{
+      padding-top: 10px;
+    }
   }
 }
 </style>

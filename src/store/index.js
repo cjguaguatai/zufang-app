@@ -8,7 +8,9 @@ export default new Vuex.Store({
     // token
     userToken: getToken('userToken') || {},
     // 租房详情页标头id
-    id: getToken('id')
+    id: getToken('id'),
+    // 首页展示城市信息、及城市列表当前城市
+    area: getToken('area')
   },
   getters: {},
   mutations: {
@@ -23,6 +25,11 @@ export default new Vuex.Store({
     setId (state, data) {
       state.id = data
       setToken('id', data)
+    },
+    // 更改area
+    setArea (state, data) {
+      state.area = data
+      setToken('area', data)
     },
     removeUserToken () {
       removeToken()

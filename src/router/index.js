@@ -57,11 +57,17 @@ const routes = [
     name: 'detail',
     component: () => import('@/views/Detail')
   },
-  // 出租管理页面
+  // 我的出租页面
   {
     path: '/rent',
     name: 'rent',
     component: () => import('@/views/Rent')
+  },
+  // 城市列表
+  {
+    path: '/city',
+    name: 'city',
+    component: () => import('@/views/City')
   }
 ]
 const router = new VueRouter({
