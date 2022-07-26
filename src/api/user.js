@@ -62,3 +62,16 @@ export const removeFavorite = (id) =>
     url: `/user/favorites/${id}`,
     method: 'delete'
   })
+
+/**
+ * 发布房源
+ * @param {Object} data
+ * @returns
+ */
+export const sendHouse = (data) => {
+  return request({
+    url: '/user/houses',
+    method: 'post',
+    data
+  })
+}

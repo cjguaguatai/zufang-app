@@ -10,7 +10,11 @@ export default new Vuex.Store({
     // 租房详情页标头id
     id: getToken('id'),
     // 首页展示城市信息、及城市列表当前城市
-    area: getToken('area')
+    area: getToken('area') || {},
+    isShow: '',
+    community: {
+      communityName: '请输入小区名称'
+    }
   },
   getters: {},
   mutations: {
@@ -30,6 +34,13 @@ export default new Vuex.Store({
     setArea (state, data) {
       state.area = data
       setToken('area', data)
+    },
+    setIsShow (state, data) {
+      state.isShow = data
+    },
+    // 点击小区列表传参
+    setCommunity (state, data) {
+      state.community = data
     },
     removeUserToken () {
       removeToken()

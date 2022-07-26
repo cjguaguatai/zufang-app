@@ -1,5 +1,6 @@
 <template>
-  <div>FindRoom</div>
+  <div>
+  </div>
 </template>
 
 <script>

@@ -61,7 +61,22 @@ const routes = [
   {
     path: '/rent',
     name: 'rent',
-    component: () => import('@/views/Rent')
+    component: () => import('@/views/Rent'),
+    redirect: '/ ',
+    children: [
+      {
+        path: '/ ',
+        component: () => import('@/views/Rent/components/manageRent')
+      },
+      {
+        path: 'add',
+        component: () => import('@/views/Rent/components/toRent')
+      },
+      {
+        path: 'search',
+        component: () => import('@/views/Rent/components/Search')
+      }
+    ]
   },
   // 城市列表
   {

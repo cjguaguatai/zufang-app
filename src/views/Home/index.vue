@@ -26,7 +26,7 @@
         <van-grid-item text="地图找房">
           <i slot="icon" class="iconfont icon-ditu"></i>
         </van-grid-item>
-        <van-grid-item text="去出租">
+        <van-grid-item text="去出租" @click="toRent">
           <i slot="icon" class="iconfont icon-fangzi"></i>
         </van-grid-item>
       </van-grid>
@@ -85,6 +85,10 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    toRent () {
+      this.$router.push('/rent/add')
+      // this.$store.commit('setIsShow', 1)
     }
   }
 }
@@ -185,12 +189,12 @@ export default {
     display: flex;
     font-size: 14px;
     color: #333333;
-    img{
+    img {
       width: 50px;
       height: 50px;
-      margin: 0 10px;
+      margin: 10px 10px 0;
     }
-    .text{
+    .text {
       padding-top: 10px;
     }
   }

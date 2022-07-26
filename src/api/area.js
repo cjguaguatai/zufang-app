@@ -24,3 +24,14 @@ export const cityInfo = (name) =>
       name
     }
   })
+/**
+ * 去出租根据关键词查询
+ * @param {string} name
+ * @param {string} id
+ * @returns
+ */
+export const keyWordsCommunity = (name, id) => {
+  return request({
+    url: `/area/community?name=${name}&id=${id}`
+  })
+}
